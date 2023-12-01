@@ -6,12 +6,23 @@ struct lnode{
     int data;
     struct lnode *next;
 };
+
+struct lnode2{
+    int data;
+    struct lnode *prev;
+    struct lnode *next;
+};
+
+typedef struct lnode2 node2;
+node2* head1=NULL;
+node2* tail1=NULL;
   
 typedef struct lnode node;
 node* head=NULL;
   
  
-//function declaration
+//function declaration for single link list
+
 void insertatBegging(int val);
 void Display(); 
 void insertatPostion(int pos, int val);
@@ -27,104 +38,117 @@ void total();
 void reverselist();
 
 int main(){     
-    int val,choice,pos,ser;
-      
+    int pt=1;
+    int val,choice,pos,ser,ma,da;
     while(1){
-        printf("\n");
-        printf("__________________OPTIONS_____________________\n");
-        printf("1.Insert at begging\n");
-        printf("2.Insert at postion\n");
-        printf("3.Delete at postion\n");
-        printf("4.Delete at begging\n");
-        printf("5 Delete at end\n");
-        printf("6.Insert at end\n");
-        printf("7.Read at postion\n");
-        printf("8.search\n");
-        printf("9.Display data\n");
-        printf("10.Total ammount of data\n");
-        printf("11.Reversal link list\n");
-        printf("___________________________________________\n");
-        printf("\n");
-        printf("Enter the Choice: ");
-        scanf("%d",&choice);
-        switch (choice){
-
-            case 1: printf("Inserted at postion\n");
-                    printf("Enter the value : ");
-                    scanf("%d",&val);
-                    insertatBegging(val);
-                    break;
-            case 2: printf("Inserted at postion\n");
-                    printf("Enter the postion : ");
-                    scanf("%d",&pos);
-                    printf("Enter the value : ");
-                    scanf("%d",&val);
-                    if(pos == 0)
+      printf("__________________Methods_________________\n");
+      printf("Single link list\n");
+      printf("Double link list\n");
+      printf("_______________________________________________\n");
+      printf("Enter the choice: ");
+      scanf("%d",&ma);
+      switch(ma){
+       case 1:
+        while(pt){
+            printf("\n");
+            printf("__________________OPTIONS_____________________\n");
+            printf("1.Insert at begging\n");
+            printf("2.Insert at postion\n");
+            printf("3.Delete at postion\n");
+            printf("4.Delete at begging\n");
+            printf("5 Delete at end\n");
+            printf("6.Insert at end\n");
+            printf("7.Read at postion\n");
+            printf("8.search\n");
+            printf("9.Display data\n");
+            printf("10.Total ammount of data\n");
+            printf("11.Reversal link list\n");
+            printf("0.Exit\n");
+            printf("___________________________________________\n");
+            printf("\n");
+            printf("Enter the Choice: ");
+            scanf("%d",&choice);
+            switch (choice){
+                case 0: pt=0;
+                        break;
+                case 1: printf("Inserted at postion\n");
+                        printf("Enter the value : ");
+                        scanf("%d",&val);
                         insertatBegging(val);
-                    if(pos < 0){
-                        printf("Invalid postion\n");
-                        return 0;
-                    }else{
-                        insertatPostion(pos, val);
-                    }
-                    break;
+                        break;
+                case 2: printf("Inserted at postion\n");
+                        printf("Enter the postion : ");
+                        scanf("%d",&pos);
+                        printf("Enter the value : ");
+                        scanf("%d",&val);
+                        if(pos == 0)
+                            insertatBegging(val);
+                        if(pos < 0){
+                            printf("Invalid postion\n");
+                            return 0;
+                        }else{
+                            insertatPostion(pos, val);
+                        }
+                        break;
 
-            case 3: printf("Delete at postion\n");
-                    printf("Enter the postion : ");
-                    scanf("%d",&pos);
-                    if(pos < 0){
+                case 3: printf("Delete at postion\n");
+                        printf("Enter the postion : ");
+                        scanf("%d",&pos);
+                        if(pos < 0){
                         printf("Invalid postion");
                         return 0;
-                    }
-                    if(pos == 0){
+                        }
+                        if(pos == 0){
+                            deleteatBegging();
+                            return 0;
+                        }
+                        deleteatPostion(pos);
+                        break;
+                case 4:printf("Delete at begging\n");
+                       if((checkInvalidOrNOt(pos))==0)
+                           return 0;
+
                         deleteatBegging();
-                        return 0;
-                    }
-                    deleteatPostion(pos);
-                    break;
-            case 4:printf("Delete at begging\n");
-                   if((checkInvalidOrNOt(pos))==0)
-                       return 0;
+                        printf("\n");
+                        break;
 
-                    deleteatBegging();
-                    printf("\n");
-                    break;
+                case 5: printf("Delete at end\n");
+                        deleteatEnd();
+                        break;
 
-            case 5: printf("Delete at end\n");
-                    deleteatEnd();
-                    break;
-
-            case 6: printf("Inserted at end\n");
-                    printf("Enter the value : ");
-                    scanf("%d",&val);
-                    insertAtEnd(val);
-                    break;
-            case 7: printf("Read at postion\n");
-                    printf("Enter the postion : ");
-                    scanf("%d",&pos);
-                    if((checkInvalidOrNOt(pos))==0)
-                        return 0;
-                    readAtpostion(pos);
-                    break;
-            case 8: printf("search\n");
-                    printf("Enter the value : ");
-                    scanf("%d",&val);
-                    search(val);
-                    break;
-            case 9: Display();
-                    break;
-            case 10: printf("Total amount of data\n");
-                     total();
-                     break;
-            case 11:
-                     printf("Reversal linked list\n");
-                     reverselist();
-                     break;
-        }
+                 case 6: printf("Inserted at end\n");
+                        printf("Enter the value : ");
+                        scanf("%d",&val);
+                        insertAtEnd(val);
+                        break;
+                case 7: printf("Read at postion\n");
+                        printf("Enter the postion : ");
+                        scanf("%d",&pos);
+                        if((checkInvalidOrNOt(pos))==0)
+                            return 0;
+                        readAtpostion(pos);
+                        break;
+                case 8: printf("search\n");
+                        printf("Enter the value : ");
+                        scanf("%d",&val);
+                        search(val);
+                        break;
+                case 9: Display();
+                        break;
+                case 10: printf("Total amount of data\n");
+                         total();
+                         break;
+                case 11:
+                         printf("Reversal linked list\n");
+                         reverselist();
+                         break;
+           }
+       }
+    
     }
-  
-  
   }
+  
+}
   
  void insertatBegging(int val){
     node* newnode=(node*)malloc(sizeof(node));
